@@ -22,7 +22,7 @@ function CategoryContext({ children }: any) {
 
   useEffect(() => {
     axios
-      .get("http://webdev.cs.vt.edu:8080/VedantBookstoreReactOrder/api/categories")
+      .get("http://localhost:8080/VedantBookstoreReactTransact/api/categories")
       .then((result) => setCategories(result.data))
       .catch(console.error);
   }, []);

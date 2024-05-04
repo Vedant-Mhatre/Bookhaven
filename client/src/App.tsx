@@ -12,7 +12,7 @@ import Confirmation from "./components/Confirmation";
 function App() {
   useContext(Category);
   return (
-    <Router basename={"VedantBookstoreReactOrder"}>
+    <Router basename={"VedantBookstoreReactTransact"}>
       <AppHeader />
       <Routes>
         <Route path="/" element={<Home />} />

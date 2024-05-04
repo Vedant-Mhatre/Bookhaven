@@ -115,7 +115,7 @@ function CheckoutPage() {
 
     const orders = JSON.stringify(order);
     // console.log(orders); //you can uncomment this to see the orders JSON on the console
-    const url = 'http://webdev.cs.vt.edu:8080/VedantBookstoreReactOrder/api/orders';
+    const url = 'http://localhost:8080/VedantBookstoreReactTransact/api/orders';
     const orderDetails: OrderDetails = await axios
       .post(url, orders, {
         headers: {
