@@ -1,0 +1,71 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  background-color: #000;
+  color: var(--secondary-text-color);
+}
+
+.footer a {
+  color: var(--secondary-text-color);
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer a:hover,
+.footer a:focus {
+  transform: scale(1.1); /* Slightly increase size on hover/focus */
+  cursor: pointer; /* Change cursor to indicate clickable item */
+  color: rgb(205, 205, 205);
+}
+
+.footer .left-section,
+.footer .center-section,
+.footer .right-section {
+  display: flex;
+  align-items: center;
+}
+
+.footer .left-section {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6em;
+}
+
+.footer .navigation-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+}
+
+.footer .center-section {
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.footer .right-section {
+  justify-content: flex-end;
+}
+
+.footer .social-media-icons {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1.5em;
+  justify-content: space-around;
+}
+
+.footer .social-media-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer .social-media-icons img:hover,
+.footer .social-media-icons img:focus {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+

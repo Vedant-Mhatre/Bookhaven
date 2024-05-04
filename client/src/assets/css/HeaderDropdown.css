@@ -1,0 +1,55 @@
+.header-dropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  position: relative ;
+  cursor: pointer;
+}
+
+.categories-button {
+  background-color: var(--primary-color);
+  align-items: flex-end;
+display: flex;
+}
+
+/* Adjusted to display flex for direct alignment */
+.header-dropdown ul {
+  background-color: white;
+  color: black;
+display: block; /* Prepared for transition effects */
+  opacity: 0; /* Start fully transparent */
+  visibility: hidden; /* Initially hidden */
+  margin-top: 0; /* Adjusted to remove additional top margin */
+  padding-top: 1em; /* Space between button and dropdown */
+  position: absolute;
+  top: 100%; /* Start directly below the parent container */
+  left: 0; /* Align with the left edge of the parent */
+  min-width: 8em;  
+  z-index: 1;
+  transition: opacity 0.5s ease, visibility 0.5s, transform 0.5s ease;
+  transform: translateY(-20px); /* Initial transformation for animation */
+}
+
+.header-dropdown li {
+  padding: 0.25em 0.5em;
+  display: block; /* Ensure list items take full width for easier click */
+}
+
+.header-dropdown a {
+  color: black;
+  text-decoration: none;
+  display: block; /* Make the anchor block level for full width click area */
+}
+
+.header-dropdown li:hover {
+  background: lightgray;
+}
+
+/* Ensure that the hover effect to display the dropdown applies when hovering over the button */
+.categories-button:hover + ul, .header-dropdown ul:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}

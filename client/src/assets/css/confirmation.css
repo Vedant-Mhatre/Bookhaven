@@ -1,0 +1,10 @@
+.confirmation{
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    gap: 2em;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 5em;
+    height: 85vh;
+}

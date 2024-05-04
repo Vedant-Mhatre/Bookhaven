@@ -1,0 +1,84 @@
+#book-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em;
+  justify-content: space-evenly; /* Center items to avoid large gaps on the sides */
+  max-width: calc(5 * 200px + 4 * 40px); /* Adjust based on actual sizes */
+  margin: auto;
+  padding-top: 0.8em;
+  padding-bottom: 1.3em;
+}
+
+.book-box {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-background-color);
+  padding: 1em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  gap: 0.25em;
+  align-items: center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.book-box:hover {
+  transform: scale(1.05); /* Slightly enlarges the book box */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.book-image .image-container {
+  position: relative; /* Make the container relative to position the paragraph absolutely within it */
+  display: inline-block; /* Ensures the container fits the content (image) width */
+}
+
+.book-image img {
+  display: block; /* Removes bottom margin/whitespace inherent to inline elements like img */
+  width: 160px;
+  height: 225px;
+}
+
+.book-image p {
+  position: absolute;
+  text-align: center;
+  bottom: 0; /* Aligns the paragraph to the bottom of the image */
+  left: 0;
+  width: 100%; /* Ensures the paragraph matches the image/container width */
+  padding: 0.5em 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  margin: 0; /* Removes default margin */
+}
+
+.book-title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 10em; /* Adjust this value based on the average width of your characters and font size */
+}
+
+.book-author {
+  font-style: italic;
+}
+
+.book-box button {
+  background-color: var(--primary-color-dark);
+  color: var(--primary-color);
+  width: 100%;
+}
+
+.add-to-cart-button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-size: 14px; /* Example font size, adjust as needed */
+  cursor: pointer; /* Cursor indicates button */
+  outline: none; /* No outline on focus */
+  transition: color 0.5s ease; /* Transition for text color change */
+}
+
+.add-to-cart-button:hover {
+  color: #808080; /* Grey text on hover */
+}

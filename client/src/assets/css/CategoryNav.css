@@ -1,0 +1,32 @@
+.category-nav .category-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 2%;
+  padding-top: 0.5em;
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+.category-nav .category-buttons li {
+  margin: 0;
+  padding: 0;
+}
+
+.category-nav .category-buttons a {
+  text-decoration: none;
+  color: grey; /* Color for unselected items; change as needed */
+  padding: 0.5em 1em;
+  font-size: 1em;
+  transition: color 0.3s;
+}
+
+.category-nav .category-buttons a:hover {
+  text-decoration: underline;
+}
+
+.category-nav .category-buttons a.selected {
+  font-weight: bold;
+  text-decoration: underline;
+  color: black; /* Color for selected item; can be adjusted if needed */
+}

@@ -1,0 +1,336 @@
+.cart-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 1fr 1.2fr 1fr;
+  row-gap: 1em;
+  align-items: center;
+  margin: auto;
+  padding-top: 2em;
+  padding-bottom: 4em;
+  width: 75%;
+}
+
+.your-bag-text {
+  grid-column: 1 / -1;
+  text-align: left;
+  font-weight: bold;
+}
+
+ul {
+  display: contents;
+}
+
+ul > li {
+  display: contents;
+}
+
+.cart-empty {
+  grid-column: 1 / -1;
+  text-align: left;
+}
+
+.cart-quantity-text {
+  text-align: left;
+  grid-column: 1 / -3;
+}
+
+.cart-subtotal-text {
+  text-align: center;
+  grid-column: 5 / 6;
+  font-weight: bold;
+  padding: 0.5em;
+}
+
+.cart-subtotal-price {
+  text-align: right;
+  margin-right: 2.25em;
+  grid-column: 6 / -1;
+  font-weight: bold;
+  padding: 0.5em;
+}
+
+.table-heading {
+  background-color: #333;
+  color: white;
+}
+
+.table-heading > * {
+  background-color: #333;
+  padding: 0.5em;
+}
+
+.heading-book {
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+.heading-price {
+  grid-column: 4 / 4;
+  text-align: center;
+}
+
+.heading-quantity {
+  grid-column: 5 / 5;
+  text-align: center;
+}
+
+.heading-subtotal {
+  text-align: center;
+  grid-column: 6 / -1;
+}
+
+.cart-book-title {
+  grid-column: 2/4;
+  padding: 1em;
+}
+
+.cart-book-image {
+  padding: 1em;
+}
+
+.cart-book-image > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.cart2 img {
+  display: block;
+  width: 100px;
+  height: auto;
+}
+
+.rect {
+  background-color: var(--primary-color-dark);
+}
+
+.narrow-rect {
+  width: 75px;
+  height: 100px;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+}
+
+.wide-rect {
+  width: 125px;
+  height: 100px;
+}
+
+.cart-book-price {
+  padding: 1em;
+  text-align: center;
+}
+
+.cart-book-quantity {
+  /* padding-left: 1em;
+  padding-right: 1em; */
+  text-align: center;
+  align-items: baseline;
+  margin: auto;
+  padding: 0.5em;
+}
+
+.cart-book-subtotal {
+  text-align: right;
+  margin-right: 2.25em;
+  padding: 0.5em;
+  /* Ensure alignment is kept intact */
+}
+
+.remove-button {
+  /* Adjust padding and alignment as needed */
+  justify-self: end; /* Aligns the button to the end of its grid column */
+  margin: 2em;
+}
+/* Row separators in the table */
+
+.line-sep {
+  display: block;
+  height: 2px;
+  margin: 0.5em 0;
+  background-color: rgb(201, 201, 201);
+  grid-column: 1 / -1;
+}
+
+/* Increment/decrement buttons */
+
+.icon-button {
+  border: 2px solid transparent; /* Add a transparent border for a consistent button size on hover */
+  cursor: pointer;
+  background-color: white; /* Primary button color */
+  color: black; /* Text/icon color */
+  margin: 0.5rem; /* Spacing around the button */
+  /* padding: 0.5em; Spacing around the icon */
+  border-radius: 4px; /* Slight rounding of corners for a modern look */
+  transition: all 0.3s ease; /* Smooth transition for hover states */
+}
+
+.icon-button:hover {
+  background-color: #f5f5f5; /* Light background color on hover */
+  border-color: #ccc; /* Border color on hover */
+}
+
+/* Specific styles for increment button */
+.inc-button {
+  font-size: 1.125rem; /* Sizing consistent with your design */
+  margin-right: 0.25em; /* Space after the button */
+}
+
+/* Specific styles for decrement button */
+.dec-button {
+  font-size: 1.125rem; /* Sizing consistent with your design */
+  color: #ccc; /* Disabled color state indicating decrement */
+}
+
+/* Disabled state for decrement button */
+.dec-button:disabled {
+  color: #666; /* Greyed out color */
+  cursor: not-allowed; /* Indicates the button is not interactive */
+  background-color: #2c2c2c; /* Darker background for disabled state */
+}
+
+/* Chevron buttons */
+
+.dec-arrow-button,
+.inc-arrow-button {
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+
+.dec-arrow-button:hover,
+.inc-arrow-button:hover {
+  color: var(--primary-color-dark);
+}
+
+input[type="number"] {
+  width: 4em;
+}
+
+select {
+  background-color: var(--primary-color);
+  color: white;
+  border: 2px solid var(--primary-color-dark);
+  border-radius: 3px;
+}
+.row-line {
+  border-bottom: 1px solid black;
+}
+
+.clear-cart-button {
+  text-decoration: none;
+  cursor: pointer;
+  color: #8d0505; /* Muted text color */
+  font-size: 0.9rem; /* Smaller text */
+  grid-column: 6/-1;
+  margin: 0.5rem 0.5rem;
+  padding: 0.25rem 0.5rem; /* Adjust padding as needed */
+  text-align: center;
+  transition: background-color 0.5s; /* Smooth transition for hover effect */
+}
+
+.checkout-button,
+.cart-empty-continue-shopping-button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0; /* Non-rounded corners, typical of Adidas styling */
+  cursor: pointer;
+  transition: color 0.5s ease;
+  background-color: black;
+  color: white;
+  font-size: 1rem; /* Adjust font size as needed */
+  letter-spacing: 0.05rem; /* Letter spacing for Adidas-like styling */
+  display: flex; /* Flexbox for centering the text */
+  justify-content: space-between; /* This will push the arrow to the right */
+  align-items: center; /* Vertical alignment */
+  position: relative; /* Relative positioning for the pseudo-element */
+  text-align: left;
+}
+
+.checkout-button {
+  grid-column: 5/ -1;
+  margin-top: 3em;
+  margin-bottom: 6em;
+}
+
+.cart-empty-continue-shopping-button {
+  grid-column: 1 / 3;
+  margin-top: 1em;
+  margin-bottom: 51vh;
+}
+
+.checkout-button::after {
+  content: "→"; /* Arrow icon */
+  position: absolute; /* Absolute positioning */
+  right: 1rem;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Centering adjustment for the arrow */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.cart-empty-continue-shopping-button::after {
+  content: "→"; /* Arrow icon */
+  position: absolute; /* Absolute positioning */
+  right: 1rem;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Centering adjustment for the arrow */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.checkout-button:hover {
+  color: #808080;
+}
+
+.cart-empty-continue-shopping-button:hover {
+  color: #808080;
+}
+
+.primary-actions {
+  display: flex;
+  justify-content: space-between; /* Spreads out continue and checkout buttons */
+  margin-top: 1rem; /* Spacing from cart table */
+}
+
+.clear-cart-button:hover {
+  background-color: #8d0505;
+  color: white;
+  transition: background-color 0.5s; /* Smooth transition for hover effect */
+}
+
+.additional-shopping-prompt {
+  margin-top: 1rem;
+  text-align: center;
+  grid-column: 1 / 4;
+  margin-top: 3em;
+  text-align: left;
+  margin-bottom: 6em;
+}
+
+.additional-shopping-prompt p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.continue-shopping-button{
+  text-decoration: none;
+  border: none;
+  color: none;
+  background: none;
+  background-color: none;
+}
+
+.continue-shopping-link {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(10, 65, 176);
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  transition: background-color 0.5s, color 0.5s; /* Ensures smooth color transition */
+}
+
+.continue-shopping-link:hover,
+.continue-shopping-butlinkton:hover a { /* Apply hover effects to both button and link */
+  background-color: #3a7ecf;
+  color: white;
+}
