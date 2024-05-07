@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.YearMonth;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -82,8 +83,9 @@ public class DefaultOrderService implements OrderService {
 
 			throw new BookstoreDbException("Error during close connection for customer order", e);
 		}
-
 	}
+
+	
 
 	private long performPlaceOrderTransaction(
 			String name, String address, String phone,
@@ -99,8 +101,8 @@ public class DefaultOrderService implements OrderService {
 					cart.getComputedSubtotal() + cart.getSurcharge(),
 					generateConfirmationNumber(), customerId);
 			for (ShoppingCartItem item : cart.getItems()) {
-				lineItemDao.create(connection, item.getBookId(), customerOrderId,
-						 item.getQuantity());
+				lineItemDao.create(connection, customerOrderId,
+						item.getBookId(), item.getQuantity());
 			}
 			connection.commit();
 			return customerOrderId;
@@ -119,17 +121,10 @@ public class DefaultOrderService implements OrderService {
 	}
 
 	private Date getCardExpirationDate(String monthString, String yearString) {
-
-		try {
-			int month = Integer.parseInt(monthString);
-			int year = Integer.parseInt(yearString);
-			return new Date();
-		} catch (NumberFormatException e) {
-			throw new ApiException.ValidationFailure("ccExpiryMonth", "Invalid expiry month");
-		} catch (DateTimeException e) {
-			throw new ApiException.ValidationFailure("ccExpiryYear", "Invalid expiry year");
-		}
-
+		int month = Integer.parseInt(monthString);
+		int year = Integer.parseInt(yearString);
+		Date date = new GregorianCalendar(year, month - 1, 01).getTime();
+		return date;
 	}
 
 	private void validateCustomer(CustomerForm customerForm) {

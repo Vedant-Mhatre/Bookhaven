@@ -6,14 +6,14 @@ import business.category.CategoryDao;
 import business.book.Book;
 import business.book.BookDao;
 
-import business.order.OrderDetails;
-import business.order.OrderForm;
 import business.order.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 //import jakarta.javax.ws.rs.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import business.order.*;
+
 import java.util.List;
 
 @ApplicationPath("/")
@@ -189,11 +189,5 @@ public class ApiResource {
             throw new ApiException("order placement failed", e);
         }
     }
-
-    // TODO Implement the following APIs
-    // categories/name/{category-name}
-    // categories/name/{category-name}/books
-    // categories/name/{category-name}/suggested-books
-    // categories/name/{category-name}/suggested-books?limit=#
 
 }
