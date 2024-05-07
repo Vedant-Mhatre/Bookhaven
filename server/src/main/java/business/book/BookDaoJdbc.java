@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import business.BookstoreDbException.BookstoreQueryDbException;
 
 public class BookDaoJdbc implements BookDao {
@@ -73,7 +75,7 @@ public class BookDaoJdbc implements BookDao {
         try (Connection connection = JdbcUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_RANDOM_BY_CATEGORY_ID_SQL)) {
             statement.setLong(1, categoryId);
-            statement.setInt(2, limit);
+            statement.setLong(2,limit);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     books.add(readBook(resultSet));
@@ -88,6 +90,7 @@ public class BookDaoJdbc implements BookDao {
 
 
     private Book readBook(ResultSet resultSet) throws SQLException {
+        // TODO add description, isFeatured, rating to Book results
         long bookId = resultSet.getLong("book_id");
         String title = resultSet.getString("title");
         String author = resultSet.getString("author");
