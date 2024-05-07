@@ -23,8 +23,8 @@ function CheckoutPage() {
 
   const navigate = useNavigate();
   const cartTotalPrice = cart.reduce(
-    (total, item) => total + item.quantity * item.book.price,
-    0
+      (total, item) => total + item.quantity * item.book.price,
+      0
   );
 
   const cartQuantity = cart.length;
@@ -62,9 +62,9 @@ function CheckoutPage() {
     let isFormValid = true;
 
     if (
-      !formData.name ||
-      formData.name.length < 4 ||
-      formData.name.length > 45
+        !formData.name ||
+        formData.name.length < 4 ||
+        formData.name.length > 45
     ) {
       setNameError("Name must be between 4 and 45 characters long!");
       isFormValid = false;
@@ -73,9 +73,9 @@ function CheckoutPage() {
     }
 
     if (
-      !formData.address ||
-      formData.address.length < 4 ||
-      formData.address.length > 45
+        !formData.address ||
+        formData.address.length < 4 ||
+        formData.address.length > 45
     ) {
       setAddressError("Address must be between 4 and 45 characters long!");
       isFormValid = false;
@@ -115,18 +115,18 @@ function CheckoutPage() {
 
     const orders = JSON.stringify(order);
     // console.log(orders); //you can uncomment this to see the orders JSON on the console
-    const url = 'http://localhost:8080/VedantBookstoreReactTransact/api/orders';
+    const url = 'http://localhost:8080/VedantBookstoreReactOrder/api/orders';
     const orderDetails: OrderDetails = await axios
-      .post(url, orders, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        dispatch({ type: CartTypes.CLEAR });
-        return response.data;
-      })
-      .catch((error) => console.log(error));
+        .post(url, orders, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          dispatch({ type: CartTypes.CLEAR });
+          return response.data;
+        })
+        .catch((error) => console.log(error));
     console.log("order deatils: ", orderDetails);
     return orderDetails;
   };
@@ -159,7 +159,7 @@ function CheckoutPage() {
   }
 
   function handleInputChange(
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+      event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target;
     switch (name) {
@@ -221,248 +221,251 @@ function CheckoutPage() {
   }
 
   return (
-    <div>
-      {cart.length === 0 ? (
-        <>
-          <div className="cart-table">
-            <h1 className="your-bag-text">Checkout page</h1>
-            <div className="cart-empty">
-              <p>
-                Once you add something to your cart, it will appear here. Ready
-                to get started?
-              </p>
-            </div>
-            <Link
-              to={`/categories/${lastVisited || "New Releases"}`}
-              className="cart-empty-continue-shopping-button"
-            >
-              GET STARTED
-            </Link>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="checkout-cart-table-view">
-            <div className="checkout-page-body">
-              <div>
-                <form
-                  className="checkout-form"
-                  onSubmit={(event) => submitOrder(event)}
-                  method="post"
-                >
-                  <div>
-                    <label htmlFor="fname">Name</label>
-                    <input
-                      type="text"
-                      size={20}
-                      name="name"
-                      id="fname"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <> {nameError && <div className="error"> {nameError}</div>}</>
-                  <div>
-                    <label htmlFor="address">Address</label>
-                    <input
-                      type="text"
-                      size={20}
-                      name="address"
-                      id="address"
-                      value={formData.address}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <>
-                    {" "}
-                    {addressError && (
-                      <div className="error"> {addressError}</div>
-                    )}
-                  </>
-                  <div>
-                    <label htmlFor="phone">Phone</label>
-                    <input
-                      type="text"
-                      size={20}
-                      name="phone"
-                      id="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <>
-                    {" "}
-                    {phoneError && <div className="error"> {phoneError}</div>}
-                  </>
-                  <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="text"
-                      size={20}
-                      name="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <>
-                    {" "}
-                    {emailError && <div className="error"> {emailError}</div>}
-                  </>
-                  <div>
-                    <label htmlFor="creditCard">Credit Card</label>
-                    <input
-                      type="text"
-                      size={20}
-                      name="ccNumber"
-                      id="ccNumber"
-                      value={formData.ccNumber}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <>
-                    {" "}
-                    {creditCardError && (
-                      <div className="error"> {creditCardError}</div>
-                    )}
-                  </>
-
-                  <div>
-                    <label htmlFor="ccExpiryMonth">Exp Date</label>
-                    <select
-                      style={{ color: "black" }}
-                      name="ccExpiryMonth"
-                      value={formData.ccExpiryMonth}
-                      onChange={handleInputChange}
-                    >
-                      {months.map((month, i) => (
-                        <option key={i} value={i + 1}>
-                          {month}
-                        </option>
-                      ))}
-                    </select>
-
-                    <select
-                      style={{ color: "black" }}
-                      name="ccExpiryYear"
-                      value={formData.ccExpiryYear}
-                      onChange={handleInputChange}
-                    >
-                      {years.map((year, i) => (
-                        <option key={i} value={i + 1}>
-                          {year + 2024}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </form>
-              </div>
-              <div className="checkout-total-box">
-                <div>
-                  <p>Total Cost: ${cartTotalPrice.toFixed(2)}</p>
-                  <p>Tax (10%): ${taxAmount.toFixed(2)}</p>
-                  <p>Total (including tax): ${totalCost.toFixed(2)}</p>
+      <div>
+        {cart.length === 0 ? (
+            <>
+              <div className="cart-table">
+                <h1 className="your-bag-text">Checkout page</h1>
+                <div className="cart-empty">
+                  <p>
+                    Once you add something to your cart, it will appear here. Ready
+                    to get started?
+                  </p>
                 </div>
-                <button
-                  onClick={submitOrder}
-                  className="complete-purchase-button"
+                <Link
+                    to={`/categories/${lastVisited || "New Releases"}`}
+                    className="cart-empty-continue-shopping-button"
                 >
-                  COMPLETE PURCHASE
-                </button>
+                  GET STARTED
+                </Link>
               </div>
+            </>
+        ) : (
+            <>
+              <div className="checkout-cart-table-view">
+                <div className="checkout-page-body">
+                  <div>
+                    <form
+                        className="checkout-form"
+                        onSubmit={(event) => submitOrder(event)}
+                        method="post"
+                    >
+                      <div>
+                        <label htmlFor="fname">Name</label>
+                        <input
+                            type="text"
+                            size={20}
+                            name="name"
+                            id="fname"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                        />
+                      </div>
+                      <> {nameError && <div className="error"> {nameError}</div>}</>
+                      <div>
+                        <label htmlFor="address">Address</label>
+                        <input
+                            type="text"
+                            size={20}
+                            name="address"
+                            id="address"
+                            value={formData.address}
+                            onChange={handleInputChange}
+                        />
+                      </div>
+                      <>
+                        {" "}
+                        {addressError && (
+                            <div className="error"> {addressError}</div>
+                        )}
+                      </>
+                      <div>
+                        <label htmlFor="phone">Phone</label>
+                        <input
+                            type="text"
+                            size={20}
+                            name="phone"
+                            id="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                        />
+                      </div>
+                      <>
+                        {" "}
+                        {phoneError && <div className="error"> {phoneError}</div>}
+                      </>
+                      <div>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="text"
+                            size={20}
+                            name="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                        />
+                      </div>
+                      <>
+                        {" "}
+                        {emailError && <div className="error"> {emailError}</div>}
+                      </>
+                      <div>
+                        <label htmlFor="creditCard">Credit Card</label>
+                        <input
+                            type="text"
+                            size={20}
+                            name="ccNumber"
+                            id="ccNumber"
+                            value={formData.ccNumber}
+                            onChange={handleInputChange}
+                        />
+                      </div>
+                      <>
+                        {" "}
+                        {creditCardError && (
+                            <div className="error"> {creditCardError}</div>
+                        )}
+                      </>
 
-              <div>
-                {checkoutStatus !== "" ? (
-                  <>
-                    <section className="checkoutStatusBox">
-                      {checkoutStatus === "ERROR" ? (
-                        <div className="error_msg">
-                          Error: Please fix the problems above and try again.
-                        </div>
-                      ) : checkoutStatus === "PENDING" ? (
-                        <div>Processing...</div>
-                      ) : checkoutStatus === "OK" ? (
-                        <div>Order placed...</div>
-                      ) : (
+                      <div>
                         <div>
-                          An unexpected error occurred, please try again.
+                          <label htmlFor="ccExpiryMonth">Exp Date</label>
+                          <div className="date-inputs">
+                            <select
+                                style={{ color: "black" }}
+                                name="ccExpiryMonth"
+                                value={formData.ccExpiryMonth}
+                                onChange={handleInputChange}
+                            >
+                              {months.map((month, index) => (
+                                  <option key={index} value={index + 1}>
+                                    {month}
+                                  </option>
+                              ))}
+                            </select>
+                            <select
+                                style={{ color: "black" }}
+                                name="ccExpiryYear"
+                                value={formData.ccExpiryYear}
+                                onChange={handleInputChange}
+                            >
+                              {Array.from({ length: 15 }, (_, i) => (
+                                  <option key={i} value={yearFrom(i)}>
+                                    {yearFrom(i)}
+                                  </option>
+                              ))}
+                            </select>
+                          </div>
                         </div>
-                      )}
-                    </section>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
-
-            <div className="checkout-page-right-part">
-              {/*This displays the information about the items in the cart*/}
-              <ul className="checkout-cart-info">
-                {cart?.map((item, i) => (
-                  <div className="checkout-cart-book-item">
-                    <div className="checkout-cart-book-image" key={i}>
-                      <img
-                        src={require("../assets/images/books/" +
-                          bookImageFileName(item.book))}
-                        alt="title"
-                        className="checkout-cart-info-img"
-                        width="20%"
-                        height="20%"
-                      />
+                      </div>
+                    </form>
+                  </div>
+                  <div className="checkout-total-box">
+                    <div>
+                      <p>Total Cost: ${cartTotalPrice.toFixed(2)}</p>
+                      <p>Tax (10%): ${taxAmount.toFixed(2)}</p>
+                      <p>Total (including tax): ${totalCost.toFixed(2)}</p>
                     </div>
+                    <button
+                        onClick={submitOrder}
+                        className="complete-purchase-button"
+                    >
+                      COMPLETE PURCHASE
+                    </button>
+                  </div>
 
-                    <div className="checkout-cart-book-info">
-                      <div className="checkout-cart-book-title">
-                        {item.book.title}
-                      </div>
+                  <div>
+                    {checkoutStatus !== "" ? (
+                        <>
+                          <section className="checkoutStatusBox">
+                            {checkoutStatus === "ERROR" ? (
+                                <div className="error_msg">
+                                  Error: Please fix the problems above and try again.
+                                </div>
+                            ) : checkoutStatus === "PENDING" ? (
+                                <div>Processing...</div>
+                            ) : checkoutStatus === "OK" ? (
+                                <div>Order placed...</div>
+                            ) : (
+                                <div>
+                                  An unexpected error occurred, please try again.
+                                </div>
+                            )}
+                          </section>
+                        </>
+                    ) : (
+                        <></>
+                    )}
+                  </div>
+                </div>
 
-                      <div className="checkout-cart-book-subtotal">
-                        ${item.book.price * item.quantity}
-                      </div>
-                      <div className="checkout-cart-book-quantity">
-                        <button
-                          className="checkout-icon-button inc-button"
-                          onClick={() => {
-                            dispatch({
-                              type: CartTypes.ADD,
-                              book: item.book,
-                              id: item.book.bookId,
-                            });
-                          }}
-                        >
-                          <i className="fas fa-plus-circle">
-                            <FontAwesomeIcon icon={faPlusCircle} />
-                          </i>
-                        </button>
-                        <span className="checkout-num-button">
+                <div className="checkout-page-right-part">
+                  {/*This displays the information about the items in the cart*/}
+                  <ul className="checkout-cart-info">
+                    {cart?.map((item, i) => (
+                        <div className="checkout-cart-book-item" key={i}>
+                          <div className="checkout-cart-book-image" key={i}>
+                            <img
+                                src={require("../assets/images/books/" +
+                                    bookImageFileName(item.book))}
+                                alt="title"
+                                className="checkout-cart-info-img"
+                                width="20%"
+                                height="20%"
+                            />
+                          </div>
+
+                          <div className="checkout-cart-book-info">
+                            <div className="checkout-cart-book-title">
+                              {item.book.title}
+                            </div>
+
+                            <div className="checkout-cart-book-subtotal">
+                              ${item.book.price * item.quantity}
+                            </div>
+                            <div className="checkout-cart-book-quantity">
+                              <button
+                                  className="checkout-icon-button inc-button"
+                                  onClick={() => {
+                                    dispatch({
+                                      type: CartTypes.ADD,
+                                      book: item.book,
+                                      id: item.book.bookId,
+                                    });
+                                  }}
+                              >
+                                <i className="fas fa-plus-circle">
+                                  <FontAwesomeIcon icon={faPlusCircle} />
+                                </i>
+                              </button>
+                              <span className="checkout-num-button">
                           {item.quantity}
                         </span>
-                        &nbsp;
-                        <button
-                          className="checkout-icon-button dec-button"
-                          onClick={() => {
-                            dispatch({
-                              type: CartTypes.REMOVE,
-                              book: item.book,
-                              id: item.book.bookId,
-                            });
-                          }}
-                        >
-                          <i className="fas fa-minus-circle">
-                            <FontAwesomeIcon icon={faMinusCircle} />
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
+                              &nbsp;
+                              <button
+                                  className="checkout-icon-button dec-button"
+                                  onClick={() => {
+                                    dispatch({
+                                      type: CartTypes.REMOVE,
+                                      book: item.book,
+                                      id: item.book.bookId,
+                                    });
+                                  }}
+                              >
+                                <i className="fas fa-minus-circle">
+                                  <FontAwesomeIcon icon={faMinusCircle} />
+                                </i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </>
+        )}
+      </div>
   );
 }
 

@@ -253,6 +253,16 @@ input[type="number"] {
   box-sizing: border-box;
 }
 
+.date-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-inputs select {
+  flex: 1 1 45%;
+  margin: 0 2%;
+}
+
 .error {
   color: #d32f2f;
   font-size: 14px;
