@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static business.JdbcUtils.getConnection;
-import business.BookstoreDbException;
+
 import business.BookstoreDbException.BookstoreQueryDbException;
 import business.BookstoreDbException.BookstoreUpdateDbException;
 
@@ -23,7 +23,7 @@ public class LineItemDaoJdbc implements LineItemDao {
                     "FROM customer_order_line_item WHERE customer_order_id = ?";
 
     @Override
-    public long create(Connection connection, long bookId, long orderId, int quantity) {
+    public void create(Connection connection, long bookId, long orderId, int quantity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_LINE_ITEM_SQL)) {
             statement.setLong(1, bookId);
             statement.setLong(2, orderId);
@@ -37,10 +37,13 @@ public class LineItemDaoJdbc implements LineItemDao {
             if (rs.next()) {
                 lineItemId = rs.getLong(1);
             } else {
+                // print to debug
+                System.out.println("Failed to retrieve lineItemId auto-generated key");
                 throw new BookstoreUpdateDbException("Failed to retrieve customerId auto-generated key");
             }
-            return lineItemId;
         } catch (SQLException e) {
+            // print to debug
+            System.out.println("Encountered problem creating a new line item ");
             throw new BookstoreUpdateDbException("Encountered problem creating a new line item ", e);
         }
     }
@@ -55,8 +58,15 @@ public class LineItemDaoJdbc implements LineItemDao {
                 while (resultSet.next()) {
                     result.add(readLineItem(resultSet));
                 }
+                // print to debug
+                System.out.println("LineItemDaoJdbc.findByOrderId: " + result);
             }
+            // print to debug
+            System.out.println("LineItemDaoJdbc.findByOrderId: " + result);
         } catch (SQLException e) {
+            // print to debug
+            System.out.println("Encountered problem finding ordered books for customer order "
+                    + orderId);
             throw new BookstoreQueryDbException("Encountered problem finding ordered books for customer order "
                     + orderId, e);
         }
@@ -67,6 +77,8 @@ public class LineItemDaoJdbc implements LineItemDao {
         long bookId = resultSet.getLong("book_id");
         long orderId = resultSet.getLong("customer_order_id");
         int quantity = resultSet.getInt("quantity");
+        // print to debug
+        System.out.println("LineItemDaoJdbc.readLineItem: " + bookId + " " + orderId + " " + quantity);
         return new LineItem(bookId, orderId, quantity);
     }
 }

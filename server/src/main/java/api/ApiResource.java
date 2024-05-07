@@ -74,6 +74,9 @@ public class ApiResource {
     public List<Book> booksByCategoryName(
             @PathParam("category-name") String categoryName,
             @Context HttpServletRequest httpRequest) {
+        
+        // print to debug
+        System.out.println("ApiResource.booksByCategoryName: " + categoryName);
         try {
             Category category = categoryDao.findByName(categoryName);
             if (category == null) {
@@ -92,6 +95,9 @@ public class ApiResource {
             @PathParam("category-name") String categoryName,
             @QueryParam("limit") @DefaultValue("3") int limit,
             @Context HttpServletRequest request) {
+        
+        // print to debug
+        System.out.println("ApiResource.suggestedBooksByCategoryName: " + categoryName + ", " + limit);
         try {
             Category category = categoryDao.findByName(categoryName);
             if (category == null) {
@@ -109,6 +115,8 @@ public class ApiResource {
     public Book bookById(@PathParam("book-id") long bookId,
             @Context HttpServletRequest httpRequest) {
         try {
+            // print to debug
+            System.out.println("ApiResource.bookById: " + bookId);
             Book result = bookDao.findByBookId(bookId);
             if (result == null) {
                 throw new ApiException(String.format("No such book id: %d", bookId));
@@ -124,6 +132,9 @@ public class ApiResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Book> booksByCategoryId(@PathParam("category-id") long categoryId,
             @Context HttpServletRequest httpRequest) {
+
+        // print to debug
+        System.out.println("ApiResource.booksByCategoryId: " + categoryId);
         try {
             Category category = categoryDao.findByCategoryId(categoryId);
             if (category == null) {
@@ -141,6 +152,9 @@ public class ApiResource {
     public List<Book> suggestedBooks(@PathParam("category-id") long categoryId,
             @QueryParam("limit") @DefaultValue("3") int limit,
             @Context HttpServletRequest request) {
+        
+        // print to debug
+        System.out.println("ApiResource.suggestedBooks: " + categoryId + ", " + limit);
         try {
             return bookDao.findRandomByCategoryId(categoryId, limit);
         } catch (Exception e) {
@@ -157,9 +171,14 @@ public class ApiResource {
         try {
 
             long orderId = orderService.placeOrder(orderForm.getCustomerForm(), orderForm.getCart());
+            // print all order details and input parameter too to debug
+            System.out.println("ApiResource.placeOrder: " + orderForm + ", " + orderId);
+
             if (orderId > 0) {
+
                 return orderService.getOrderDetails(orderId);
             } else {
+                
                 throw new ApiException.ValidationFailure("Unknown error occurred");
             }
 

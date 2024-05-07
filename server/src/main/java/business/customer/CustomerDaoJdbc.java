@@ -27,7 +27,7 @@ public class CustomerDaoJdbc implements CustomerDao {
 
     private static final String FIND_BY_CUSTOMER_ID_SQL =
             "SELECT customer_id, name, address, " +
-                    "phone, address, cc_number, cc_exp_date " +
+                    "phone, email, cc_number, cc_exp_date " +
                     "FROM customer WHERE customer_id = ?";
 
     @Override
@@ -38,6 +38,8 @@ public class CustomerDaoJdbc implements CustomerDao {
                        String email,
                        String ccNumber,
                        Date ccExpDate) {
+
+        java.sql.Date new_date = new java.sql.Date(ccExpDate.getTime());
         try (PreparedStatement statement =
                      connection.prepareStatement(CREATE_CUSTOMER_SQL, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, name);
@@ -45,7 +47,7 @@ public class CustomerDaoJdbc implements CustomerDao {
             statement.setString(3, phone);
             statement.setString(4, email);
             statement.setString(5, ccNumber);
-            statement.setDate(6, (java.sql.Date) ccExpDate);
+            statement.setDate(6, new_date);
             int affected = statement.executeUpdate();
             if (affected != 1) {
                 throw new BookstoreUpdateDbException("Failed to insert a customer, affected row count = " + affected);
@@ -57,6 +59,9 @@ public class CustomerDaoJdbc implements CustomerDao {
             } else {
                 throw new BookstoreUpdateDbException("Failed to retrieve customerId auto-generated key");
             }
+
+            // print to debug
+            System.out.println("CustomerDaoJdbc.create: " + customerId);
             return customerId;
         } catch (SQLException e) {
             throw new BookstoreUpdateDbException("Encountered problem creating a new customer ", e);
@@ -74,6 +79,8 @@ public class CustomerDaoJdbc implements CustomerDao {
                 Customer c = readCustomer(resultSet);
                 result.add(c);
             }
+            // print to debug
+            System.out.println("CustomerDaoJdbc.findAll: " + result);
         } catch (SQLException e) {
             throw new BookstoreQueryDbException("Encountered problem finding all categories", e);
         }
@@ -95,8 +102,15 @@ public class CustomerDaoJdbc implements CustomerDao {
                     result = readCustomer(resultSet);
                 }
             }
+
+            // print to debug
+            System.out.println("CustomerDaoJdbc.findByCustomerId: " + result);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new BookstoreQueryDbException("Encountered problem finding customer " + customerId, e);
+
+
+
         }
         return result;
     }
@@ -109,6 +123,9 @@ public class CustomerDaoJdbc implements CustomerDao {
         String email = resultSet.getString("email");
         String ccNumber = resultSet.getString("cc_number");
         Date ccExpDate = resultSet.getDate("cc_exp_date");
+
+        // print to debug
+        System.out.println("CustomerDaoJdbc.readCustomer: " + customerId + " " + name + " " + address + " " + phone + " " + email + " " + ccNumber + " " + ccExpDate);
         return new Customer(customerId, name, address, phone, email, ccNumber, ccExpDate);
     }
 }

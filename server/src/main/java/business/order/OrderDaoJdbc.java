@@ -48,8 +48,12 @@ public class OrderDaoJdbc implements OrderDao {
             } else {
                 throw new BookstoreUpdateDbException("Failed to retrieve customerOrderId auto-generated key");
             }
+            // print to debug
+            System.out.println("Created new customer order with id = " + customerOrderId);
             return customerOrderId;
         } catch (SQLException e) {
+            // print to debug
+            System.out.println("Encountered problem creating a new customer ");
             throw new BookstoreUpdateDbException("Encountered problem creating a new customer ", e);
         }
     }
@@ -67,6 +71,8 @@ public class OrderDaoJdbc implements OrderDao {
         } catch (SQLException e) {
             throw new BookstoreQueryDbException("Encountered problem finding all orders", e);
         }
+        // print to debug
+        System.out.println("OrderDaoJdbc.findAll: " + result);
         return result;
     }
 
@@ -84,6 +90,8 @@ public class OrderDaoJdbc implements OrderDao {
         } catch (SQLException e) {
             throw new BookstoreQueryDbException("Encountered problem finding customer order id = " + orderId, e);
         }
+        // print to debug
+        System.out.println("OrderDaoJdbc.findByOrderId: " + result);
         return result;
     }
 
@@ -102,6 +110,8 @@ public class OrderDaoJdbc implements OrderDao {
         } catch (SQLException e) {
             throw new BookstoreQueryDbException("Encountered problem finding customer id = " + customerId, e);
         }
+        // print to debug
+        System.out.println("OrderDaoJdbc.findByCustomerId: " + result);
         return result;
     }
 
@@ -111,6 +121,8 @@ public class OrderDaoJdbc implements OrderDao {
         Date dateCreated = resultSet.getTimestamp("date_created");
         int confirmationNumber = resultSet.getInt("confirmation_number");
         long customerId = resultSet.getLong("customer_id");
+        // print to debug
+        System.out.println("OrderDaoJdbc.readOrder: " + orderId + " " + amount + " " + dateCreated + " " + confirmationNumber + " " + customerId);
         return new Order(orderId, amount, dateCreated, confirmationNumber, customerId);
     }
 

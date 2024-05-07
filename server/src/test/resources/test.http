@@ -6,11 +6,11 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-GET http://localhost:8080/VedantBookstoreReactOrder/api/categories
+GET http://localhost:8080/VedantBookstoreReactTransact/api/categories
 Accept: application/json
 
 ### place order
-curl 'http://webdev.cs.vt.edu:8080/VedantBookstoreReactOrder/api/orders' \
+curl 'http://webdev.cs.vt.edu:8080/VedantBookstoreReactTransact/api/orders' \
   -H 'Accept: application/json, text/plain, */*' \
   -H 'Accept-Language: en-US,en;q=0.5' \
   -H 'Cache-Control: no-cache' \
@@ -19,7 +19,7 @@ curl 'http://webdev.cs.vt.edu:8080/VedantBookstoreReactOrder/api/orders' \
   -H 'Cookie: AMCV_4F173DF05A373EBF0A495E41%40AdobeOrg=MCMID%7C06517900806287523832503719917841285119; nlid=687ef71|6fb45d2' \
   -H 'Origin: http://webdev.cs.vt.edu:8080' \
   -H 'Pragma: no-cache' \
-  -H 'Referer: http://webdev.cs.vt.edu:8080/VedantBookstoreReactOrder/checkout' \
+  -H 'Referer: http://webdev.cs.vt.edu:8080/VedantBookstoreReactTransact/checkout' \
   -H 'Sec-GPC: 1' \
   -H 'User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36' \
   --data-raw '{"customerForm":{"name":"Vedant Mhatre","address":"2251 Pimmit Dr Apt 1415","phone":"5712453073","email":"vedantmh1@gmail.com","ccNumber":"4444333322221111","ccExpiryMonth":5,"ccExpiryYear":2024},"cart":{"itemArray":[{"id":1001,"book":{"bookId":1001,"isPublic":false,"price":10,"title":"The Glass Hotel","author":"Emily St. John Mandel","categoryId":1001},"quantity":1},{"id":1002,"book":{"bookId":1002,"isPublic":false,"price":11,"title":"The Vanishing Half","author":"Brit Bennett","categoryId":1001},"quantity":1},{"id":1003,"book":{"bookId":1003,"isPublic":false,"price":9,"title":"The Night Watchman","author":"Louise Erdrich","categoryId":1001},"quantity":1},{"id":1004,"book":{"bookId":1004,"isPublic":true,"price":12,"title":"The Book of Longings","author":"Sue Monk Kidd","categoryId":1001},"quantity":1}]}}' \
