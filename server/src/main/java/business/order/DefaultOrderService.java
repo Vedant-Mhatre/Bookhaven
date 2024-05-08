@@ -57,6 +57,9 @@ public class DefaultOrderService implements OrderService {
         validateCustomer(customerForm);
         validateCart(cart);
         try (Connection connection = JdbcUtils.getConnection()) {
+            if (customerForm.getCcExpiryMonth() == null || customerForm.getCcExpiryMonth().trim().isEmpty() || customerForm.getCcExpiryYear() == null || customerForm.getCcExpiryYear().trim().isEmpty()) {
+                throw new ApiException.ValidationFailure("ccExpiry", "Credit card expiration date is required.");
+            }
             Date ccExpDate = getCardExpirationDate(customerForm.getCcExpiryMonth(), customerForm.getCcExpiryYear());
             return performPlaceOrderTransaction(customerForm.getName(), customerForm.getAddress(), customerForm.getPhone(), customerForm.getEmail(), customerForm.getCcNumber(), ccExpDate, cart, connection);
         } catch (SQLException e) {
@@ -92,6 +95,9 @@ public class DefaultOrderService implements OrderService {
         try {
             int month = Integer.parseInt(monthString);
             int year = Integer.parseInt(yearString);
+            if (month < 1 || month > 12) {
+                throw new ApiException.ValidationFailure("ccExpiryMonth", "Month must be between 1 and 12.");
+            }
             return new GregorianCalendar(year, month - 1, 1).getTime();
         } catch (NumberFormatException e) {
             throw new ApiException.ValidationFailure("expDate", "Invalid credit card expiry format.");
