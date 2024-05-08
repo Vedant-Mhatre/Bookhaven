@@ -12,6 +12,8 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons/faMinusCircle";
 import { Category } from "../contexts/CategoryContext";
 import axios from "axios";
+import { OrderStore } from "../contexts/OrderDetailContext";
+import { OrderTypes } from "../reducers/OrderReducer";
 
 function CheckoutPage() {
   function yearFrom(index: number) {
@@ -20,6 +22,7 @@ function CheckoutPage() {
 
   const { cart, dispatch } = useContext(CartStore);
   const { lastVisited } = useContext(Category);
+  const {dispatch: orderDispatch} = useContext(OrderStore);
 
   const navigate = useNavigate();
   const cartTotalPrice = cart.reduce(
@@ -28,8 +31,7 @@ function CheckoutPage() {
   );
 
   const cartQuantity = cart.length;
-  const taxRate = 0.1;
-  const taxAmount = cartTotalPrice * taxRate;
+  const taxAmount = 10;
   const totalCost = cartTotalPrice + taxAmount;
 
   const [nameError, setNameError] = useState("");
@@ -114,7 +116,6 @@ function CheckoutPage() {
     const order = { customerForm: customerForm, cart: { itemArray: cart } };
 
     const orders = JSON.stringify(order);
-    // console.log(orders); //you can uncomment this to see the orders JSON on the console
     const url = 'http://localhost:8080/VedantBookstoreReactTransact/api/orders';
     const orderDetails: OrderDetails = await axios
         .post(url, orders, {
@@ -126,16 +127,20 @@ function CheckoutPage() {
           dispatch({ type: CartTypes.CLEAR });
           return response.data;
         })
-        .catch((error) => console.log(error));
-    console.log("order deatils: ", orderDetails);
+        .catch((error) => {
+          if (error.response && error.response.data) {
+            setCheckoutStatus(`Error: ${error.response.data.message}`);
+          } else {
+            console.log(error);
+            setCheckoutStatus("An unexpected error occurred, please try again.");
+          }
+        });
     return orderDetails;
   };
 
   async function submitOrder(event: FormEvent) {
     event.preventDefault();
-    console.log("Submit order");
     const isFormCorrect = isValidForm(formData);
-    console.log(isFormCorrect);
     if (!isFormCorrect) {
       setCheckoutStatus("ERROR");
     } else {
@@ -151,6 +156,7 @@ function CheckoutPage() {
       });
       if (orders) {
         setCheckoutStatus("OK");
+        orderDispatch({ type: OrderTypes.SET_DETAILS, orderDetails: orders });
         navigate("/confirmation");
       } else {
         console.log("Error placing order");
@@ -363,7 +369,7 @@ function CheckoutPage() {
                   <div className="checkout-total-box">
                     <div>
                       <p>Total Cost: ${cartTotalPrice.toFixed(2)}</p>
-                      <p>Tax (10%): ${taxAmount.toFixed(2)}</p>
+                      <p>Surcharge: ${taxAmount.toFixed(2)}</p>
                       <p>Total (including tax): ${totalCost.toFixed(2)}</p>
                     </div>
                     <button
