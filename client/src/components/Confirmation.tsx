@@ -5,17 +5,15 @@ import ConfirmationTable from "./ConfirmationTable";
 import { OrderStore } from "../contexts/OrderDetailContext";
 import { Category } from "../contexts/CategoryContext";
 
-
 function displayMonth(month: number) {
-    return month < 10 ? `0${month}` : `${month}`;
+  return month < 10 ? `0${month}` : `${month}`;
 }
 
 function maskCreditCard(number: string) {
-    number = number.replace(/ |-/g, "");
-    const lastFourDigits = number.slice(-4);
-    return `**** **** **** ${lastFourDigits}`;
-  }
-
+  number = number.replace(/ |-/g, "");
+  const lastFourDigits = number.slice(-4);
+  return `**** **** **** ${lastFourDigits}`;
+}
 
 const Cart = () => {
   const { orderDetails } = useContext(OrderStore);
@@ -26,19 +24,27 @@ const Cart = () => {
       <h1 className="confirmation-page-title">Confirmation Page</h1>
       {!orderDetails || !orderDetails.order ? (
         <>
-          <div className="conf-center-text">
-            <p>We are sorry, the order you requested could not be found.</p>
-          </div>
-          <div className="conf-center-text">
-            <button className="conf-button" onClick={() => navigate("/")}>
-              Go to Home Page
-            </button>
+          <div className="conf-center-text" style={{ marginBottom: "60vh" }}>
+            <div className="confirmation-text">
+              <h2 className="conf-header">
+                Sorry, we couldn't find your order
+              </h2>
+
+              <button
+                className="confirmation-shopping-button"
+                onClick={() => navigate("/")}
+                
+              >
+                Go to Home Page
+              </button>
+            </div>
           </div>
         </>
       ) : (
         <div className="conf-center-text">
           <div className="confirmation-text">
             <h2 className="conf-header">Order Details</h2>
+
             <ul className="conf-ul">
               <li className="conf-li">
                 Your confirmation number is{" "}
@@ -63,11 +69,9 @@ const Cart = () => {
               <li className="conf-li">Phone: {orderDetails.customer.phone}</li>
               <br />
               <li className="conf-li">
-                Credit Card: {maskCreditCard(orderDetails.customer.ccNumber)}{" "}
-                (
+                Credit Card: {maskCreditCard(orderDetails.customer.ccNumber)} (
                 {displayMonth(
-                    1 +
-                  new Date(orderDetails.customer.ccExpDate).getUTCMonth()
+                  1 + new Date(orderDetails.customer.ccExpDate).getUTCMonth()
                 )}
                 /{new Date(orderDetails.customer.ccExpDate).getUTCFullYear()})
               </li>
@@ -77,12 +81,12 @@ const Cart = () => {
 
           <ConfirmationTable />
           <div className="cart-actions">
-          <Link
-            to={`/categories/${lastVisited || "New Releases"}`}
-            className="confirmation-shopping-button"
-          >
-            Continue Shopping
-          </Link>
+            <Link
+              to={`/categories/${lastVisited || "New Releases"}`}
+              className="confirmation-shopping-button"
+            >
+              Continue Shopping
+            </Link>
           </div>
         </div>
       )}
