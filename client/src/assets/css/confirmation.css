@@ -9,8 +9,16 @@
 }
 
 .confirmation-text {
-
+    width: 70%; /* Match the width to the table */
+    margin: 2em auto; /* Centered horizontally and provide vertical spacing */
+    padding: 2em; /* Uniform padding for content breathing space */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtler and more refined shadow */
+    background-color: #fff; /* Background color for contrast */
+    font-size: 1.2rem;
+    color: #333; /* Dark grey for better readability */
+    border-radius: 8px; /* Softened corners for a modern look */
 }
+
 .confirmation-shopping-button {
     text-decoration: none;
     padding: 0.75rem 1.5rem;
@@ -40,6 +48,12 @@
     text-align: center;
 }
 
+.conf-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
 .conf-center-text {
     text-align: left;
     margin: auto;
@@ -58,12 +72,14 @@
 .conf-li {
     padding: 15px 0;
     color: #333;
+    border-bottom: 1px solid #eaeaea; /* Adds a light separator for better visual structure */
 }
 
 .conf-line-sep,
 .conf-line-sep-2 {
-    border-bottom: 1px solid #565252;
+    border-bottom: 1px solid #dcdcdc;
     margin: 15px 0;
+    height: 1px; 
 }
 
 .conf-confirmation-table {
@@ -87,12 +103,9 @@
     align-items: start;
 }
 
-.conf-heading-book-2 {
-    flex: 3;
-    text-align: left;
-}
-
+.conf-heading-book-2,
 .conf-heading-delivery {
+    flex: 3;
     text-align: left;
     padding-top: 0.5em;
 }
@@ -101,6 +114,12 @@
     flex: 1;
     text-align: center;
     white-space: nowrap;
+}
+
+/* border-bottom: 1px solid #565252; */
+
+.subtotal-line {
+    border-top: 1px solid #565252;
 }
 
 .conf-heading-subtotal-2 {
@@ -119,6 +138,8 @@
 
 .conf-total-row {
     border-top: 2px solid #000;
+    font-weight: bold; /* Emphasize total amount */
+    color: #000;
 }
 
 .conf-gap {
