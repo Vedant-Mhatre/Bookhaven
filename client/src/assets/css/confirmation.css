@@ -1,10 +1,126 @@
-.confirmation{
+.confirmation-page-container {
+    padding: 2em;
+    text-align: center;
+}
+
+.confirmation-page-title {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.confirmation-text {
+
+}
+.confirmation-shopping-button {
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0;
+    cursor: pointer;
+    transition: color 0.5s ease;
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    display: inline-block;
+    margin-top: 2em;
+}
+
+.confirmation-shopping-button:hover {
+    color: #808080;
+}
+
+.confirmation-page-message,
+.confirmation-page-details {
+    padding-top: 1rem;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.cart-actions {
+    text-align: center;
+}
+
+.conf-center-text {
+    text-align: left;
+    margin: auto;
+    padding: 2em;
+}
+
+.conf-strong {
+    font-weight: bold;
+}
+
+.conf-ul {
+    list-style: none;
+    padding: 0;
+}
+
+.conf-li {
+    padding: 15px 0;
+    color: #333;
+}
+
+.conf-line-sep,
+.conf-line-sep-2 {
+    border-bottom: 1px solid #565252;
+    margin: 15px 0;
+}
+
+.conf-confirmation-table {
+    width: 70%;
+    padding: 2em;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.conf-confirmation-table-ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.conf-confirmation-table-li {
     display: flex;
-    flex-direction: column;
-    justify-content: top;
-    gap: 2em;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 5em;
-    height: 85vh;
+    justify-content: space-between;
+    margin: 15px 0;
+    align-items: start;
+}
+
+.conf-heading-book-2 {
+    flex: 3;
+    text-align: left;
+}
+
+.conf-heading-delivery {
+    text-align: left;
+    padding-top: 0.5em;
+}
+
+.conf-heading-quantity-2 {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.conf-heading-subtotal-2 {
+    flex: 1;
+    text-align: right;
+}
+
+.conf-heading-price-2 {
+    text-align: right;
+    display: block;
+}
+
+.conf-heading-row {
+    border-bottom: 1px solid #565252;
+}
+
+.conf-total-row {
+    border-top: 2px solid #000;
+}
+
+.conf-gap {
+    margin-bottom: 15px;
 }
