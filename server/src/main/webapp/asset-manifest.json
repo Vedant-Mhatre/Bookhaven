@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VedantBookstoreReactTransact/static/css/main.ecdc321a.css",
-    "main.js": "/VedantBookstoreReactTransact/static/js/main.38e35df9.js",
+    "main.css": "/VedantBookstoreReactTransact/static/css/main.2c57d8fa.css",
+    "main.js": "/VedantBookstoreReactTransact/static/js/main.d2699f0c.js",
     "static/js/453.258b012d.chunk.js": "/VedantBookstoreReactTransact/static/js/453.258b012d.chunk.js",
     "static/media/a-gentleman-in-moscow.jpeg": "/VedantBookstoreReactTransact/static/media/a-gentleman-in-moscow.aa37ba7a4e6718c2f57f.jpeg",
     "static/media/the-catcher-in-the-rye.jpeg": "/VedantBookstoreReactTransact/static/media/the-catcher-in-the-rye.d5999dcf14b603e7e50e.jpeg",
@@ -63,12 +63,12 @@
     "static/media/the-brothers-karamazov.gif": "/VedantBookstoreReactTransact/static/media/the-brothers-karamazov.4982f5b4619a9ef84914.gif",
     "static/media/little-dorrit.gif": "/VedantBookstoreReactTransact/static/media/little-dorrit.efde18fca9bb33eb8a6e.gif",
     "index.html": "/VedantBookstoreReactTransact/index.html",
-    "main.ecdc321a.css.map": "/VedantBookstoreReactTransact/static/css/main.ecdc321a.css.map",
-    "main.38e35df9.js.map": "/VedantBookstoreReactTransact/static/js/main.38e35df9.js.map",
+    "main.2c57d8fa.css.map": "/VedantBookstoreReactTransact/static/css/main.2c57d8fa.css.map",
+    "main.d2699f0c.js.map": "/VedantBookstoreReactTransact/static/js/main.d2699f0c.js.map",
     "453.258b012d.chunk.js.map": "/VedantBookstoreReactTransact/static/js/453.258b012d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ecdc321a.css",
-    "static/js/main.38e35df9.js"
+    "static/css/main.2c57d8fa.css",
+    "static/js/main.d2699f0c.js"
   ]
 }

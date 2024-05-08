@@ -99,8 +99,8 @@ public class DefaultOrderService implements OrderService {
                 throw new ApiException.ValidationFailure("ccExpiryMonth", "Month must be between 1 and 12.");
             }
             return new GregorianCalendar(year, month - 1, 1).getTime();
-        } catch (NumberFormatException e) {
-            throw new ApiException.ValidationFailure("expDate", "Invalid credit card expiry format.");
+        } catch (Exception e) {
+            throw new ApiException.ValidationFailure("expDate", "An error occurred while processing the credit card expiry date. Please check month and year values.");
         }
     }
 
@@ -168,7 +168,7 @@ public class DefaultOrderService implements OrderService {
                 throw new ApiException.ValidationFailure("expDate", "Credit card is expired.");
             }
             return false;
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             throw new ApiException.ValidationFailure("expDate", "Invalid credit card expiry format.");
         }
     }
