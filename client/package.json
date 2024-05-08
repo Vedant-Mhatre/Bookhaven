@@ -51,6 +51,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://localhost:8080/VedantBookstoreReactTransact/",
-  "proxy": "http://localhost:3000/"
+  "homepage": "http://webdev.cs.vt.edu:8080/VedantBookstoreReactTransact/",
+  "proxy": "http://webdev.cs.vt.edu:3000/"
 }

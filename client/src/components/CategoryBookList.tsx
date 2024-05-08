@@ -15,7 +15,7 @@ function CategoryBookList() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/VedantBookstoreReactTransact/api/categories/name/${id}/books/`
+        `http://webdev.cs.vt.edu:8080/VedantBookstoreReactTransact/api/categories/name/${id}/books/`
       )
       .then((result) => {
         setBookList(result.data);

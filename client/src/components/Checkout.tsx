@@ -116,7 +116,7 @@ function CheckoutPage() {
     const order = { customerForm: customerForm, cart: { itemArray: cart } };
 
     const orders = JSON.stringify(order);
-    const url = 'http://localhost:8080/VedantBookstoreReactTransact/api/orders';
+    const url = 'http://webdev.cs.vt.edu:8080/VedantBookstoreReactTransact/api/orders';
     const orderDetails: OrderDetails = await axios
         .post(url, orders, {
           headers: {
