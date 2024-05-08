@@ -6,10 +6,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-import java.io.StringWriter;
+
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Jersey: Manage all validation exceptions that emerge from an API.
@@ -17,9 +15,7 @@ import java.util.logging.Logger;
 @Provider
 @Priority(Priorities.USER)
 public class ApiExceptionHandler implements
-		ExceptionMapper<ApiException> {
-
-	private Logger logger = Logger.getLogger(ApiExceptionHandler.class.getName());
+	ExceptionMapper<ApiException> {
 
 	@Override
 	public Response toResponse(ApiException exception) {
@@ -31,30 +27,26 @@ public class ApiExceptionHandler implements
 	}
 
 	private Response makeResponse(Exception exception, Response.Status status) {
-		String fieldName = null;
-		if (exception instanceof ApiException.ValidationFailure) {
-			ApiException.ValidationFailure validationException = (ApiException.ValidationFailure) exception;
-			if (validationException.isFieldError()) {
-				fieldName = validationException.getFieldName();
-			}
-		}
-
 		try {
-			ServerErrorResponse serverErrorResponse = new ServerErrorResponse(
-					status.getReasonPhrase(),
-					exception.getMessage(),
-					fieldName);
+			String fieldName = Optional.of(exception)
+					.filter(ApiException.ValidationFailure.class::isInstance)
+					.map(ApiException.ValidationFailure.class::cast)
+					.filter(ApiException.ValidationFailure::isFieldError)
+					.map(ApiException.ValidationFailure::getFieldName)
+					.orElse(null);
+
+			ServerErrorResponse serverErrorResponse =
+					new ServerErrorResponse(status.getReasonPhrase(),
+							exception.getMessage(), fieldName);
 			return Response.status(status).entity(serverErrorResponse).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (Exception e) {
-			logger.log(Level.INFO, e, () -> "Problem attempting to map an Exception to a json response");
-			logger.log(Level.INFO, exception, () -> "Original Exception");
-			ServerErrorResponse internalErrorResponse = new ServerErrorResponse(
-					Response.Status.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-					"Problem attempting to map an Exception to a JSON response: " + e.getMessage());
+
+			ServerErrorResponse internalErrorResponse =
+					new ServerErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+							"Problem attempting to map an Exception to a JSON response: "+e.getMessage());
 			return Response.serverError().entity(internalErrorResponse).build();
 		}
 	}
-
 	public record ServerErrorResponse(String reason, String message, String fieldName) {
 		public ServerErrorResponse(String reason, String message) {
 			this(reason, message, null);

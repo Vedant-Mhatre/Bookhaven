@@ -11,6 +11,30 @@ type AppActions = {
   type: "ADD" | "REMOVE" | "CLEAR";
   item: BookItem;
 };
+const SURCHARGE = 10;
+const calculateSubtotal = (items: ShoppingCartItem[]): number => {
+  return items.reduce((sum, item) => sum + item.quantity * item.book.price, 0);
+};
+
+export const getSurcharge = (items: ShoppingCartItem[]): number => {
+  return SURCHARGE;
+};
+
+export const getNumberOfItems = (items: ShoppingCartItem[]): number => {
+  return items.reduce((sum, item) => sum + item.quantity, 0);
+};
+
+export const getSubtotal = (items: ShoppingCartItem[]): number => {
+  return calculateSubtotal(items);
+};
+
+export const getTotal = (items: ShoppingCartItem[]): number => {
+  return calculateSubtotal(items) + (SURCHARGE);
+};
+
+export const isEmpty = (items: ShoppingCartItem[]): boolean => {
+  return items.length === 0;
+};
 
 export const cartReducer = (
   state: ShoppingCartItem[],
